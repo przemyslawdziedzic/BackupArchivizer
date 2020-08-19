@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="GlobalConfigurationSection">
+    <xs:complexType>
+      <xs:attribute type="xs:string" name="archivizer7zFullName" use="required"/>
+      <xs:attribute type="xs:boolean" name="deleteSourceFileAfterArchiving" use="required"/>
+      <xs:attribute type="xs:integer" name="maxNumberOfLatestArchiveFilesInKept" use="optional"/>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:element name="SupportedArchivizerConfigurationForDirectorySection">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="ArchivizerConfigurationForDirectory" maxOccurs="unbounded" minOccurs="1">
+          <xs:complexType>
+            <xs:attribute type="xs:string" name="name" use="optional"/>
+            <xs:attribute type="FileExtensionToCompression" name="fileExtensionToCompression" use="required"/>
+            <xs:attribute type="xs:string" name="directoryFullName" use="required"/>
+            <xs:attribute type="CompressionLevel" name="compressionLevel" use="required"/>
+            <xs:attribute type="ArchiveFormat" name="formatArchiwum" use="optional" default="7z" />
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>     
+    </xs:complexType>
+  </xs:element>
+  <xs:simpleType name="FileExtensionToCompression">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="bak" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="ArchiveFormat">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="7z" />
+      <xs:enumeration value="tar" />
+      <xs:enumeration value="zip" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="CompressionLevel">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Store" />
+      <xs:enumeration value="Fastest" />
+      <xs:enumeration value="Fast" />
+      <xs:enumeration value="Normal" />
+      <xs:enumeration value="Maximum" />
+      <xs:enumeration value="Ultra" />
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>
